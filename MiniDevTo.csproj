@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FastEndpoints" Version="6.1.0" />
+    <PackageReference Include="FastEndpoints.Security" Version="6.1.0" />
+    <PackageReference Include="FastEndpoints.Swagger" Version="6.1.0" />
+    <PackageReference Include="MassTransit" Version="8.4.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MongoDB.Entities" Version="24.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Author\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniDevTo.Messaging\MiniDevTo.Messaging.csproj" />
+  </ItemGroup>
+
+</Project>
