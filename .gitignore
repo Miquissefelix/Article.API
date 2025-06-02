@@ -8,7 +8,6 @@ obj/
 *.log
 *.vspscc
 *.vssscc
-
 ## Compilados
 *.dll
 *.exe
