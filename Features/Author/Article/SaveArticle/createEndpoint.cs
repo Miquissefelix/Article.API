@@ -17,7 +17,8 @@ namespace MiniDevTo.Features.Author.Article.SaveArticle
         public override void Configure()
         {
             Post("/author/article/create");
-            AllowAnonymous();
+            AuthSchemes("Bearer");
+            Roles("Author");
         }
 
         public override async Task HandleAsync(CreateArticleRequest req, CancellationToken ct)

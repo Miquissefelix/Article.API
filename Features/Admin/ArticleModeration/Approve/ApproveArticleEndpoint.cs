@@ -6,7 +6,7 @@ using MiniDevTo.Messaging.Contracts;
 
 namespace MiniDevTo.Features.Admin.ArticleModeration.Approve
 {
-    public class ApproveArticleEndpoint:Endpoint<ApproveArticleRequest, ApproveResponse>
+    public class ApproveArticleEndpoint : Endpoint<ApproveArticleRequest, ApproveResponse>
     {
         private readonly AppDbContext _db;
         private readonly IPublishEndpoint _publish;
@@ -18,18 +18,18 @@ namespace MiniDevTo.Features.Admin.ArticleModeration.Approve
 
         public override void Configure()
         {
-            Post("/admin/articles/approve");
-            AllowAnonymous();
-            //Roles("Admin");
+            Post("/admin/articles/approve/{ArticleId}");
+            AuthSchemes("Bearer");
+            Roles("Admin");
 
         }
-        public override async Task HandleAsync(ApproveArticleRequest req,CancellationToken ct)
+        public override async Task HandleAsync(ApproveArticleRequest req, CancellationToken ct)
         {
             var article = await _db.Articles.Include(a => a.Author)
                 .FirstOrDefaultAsync(a => a.Id == req.ArticleId,ct);
                 //FindAsync(req.ArticleId);
 
-            if(article is null)
+            if (article is null)
             {
                 await SendNotFoundAsync(ct);
                 return;
@@ -45,6 +45,7 @@ namespace MiniDevTo.Features.Admin.ArticleModeration.Approve
                 ArticleId=article.Id,
                 Title=article.Title,
                 AuthorEmail=article.Author.Email,
+                ApprovedAt=DateTime.UtcNow,
             }, ct);
 
         }

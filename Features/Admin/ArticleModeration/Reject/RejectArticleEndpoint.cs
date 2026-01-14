@@ -12,8 +12,9 @@ namespace MiniDevTo.Features.Admin.ArticleModeration.Reject
 
         public override void Configure()
         {
-            Post("/admin/articles/reject");
-            //Roles("Admin");
+            Post("/admin/articles/reject/{ArticleId}");
+            AuthSchemes("Bearer");
+            Roles("Admin");
         }
 
         public override async Task HandleAsync(RejectArticleRequest req, CancellationToken ct)

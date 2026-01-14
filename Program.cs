@@ -10,6 +10,7 @@ using MiniDevTo.Messaging.Consumers;
 using MiniDevTo.Messaging.Services;
 using MiniDevTo.Services.Auth;
 using System.Text;
+using NSwag; //jwt authetication
 
 var builder = WebApplication.CreateBuilder(args);
 //jwt
@@ -33,6 +34,10 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
         ValidateLifetime =true
     };
 });
+
+
+
+
 builder.Services.AddSingleton(jwtOptions);
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<ITokenService, TokenService>();
@@ -40,7 +45,27 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddFastEndpoints();
-builder.Services.SwaggerDocument();
+
+//swagger jwt
+builder.Services.SwaggerDocument(o =>
+{
+    o.DocumentSettings = s =>
+    {
+        s.Title = "MiniDevTo API";
+        s.Version = "v1";
+
+        // Configuração do JWT Bearer no Swagger
+        s.AddAuth("Bearer", new()
+        {
+            Type = OpenApiSecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            Description = "Insira o token JWT no formato: Bearer {seu_token}"
+        });
+    };
+
+    o.ShortSchemaNames = true;
+});
 
 //bdContext
 builder.Services.AddDbContext<AppDbContext>(options=>options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
