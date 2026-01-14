@@ -14,6 +14,7 @@ namespace MiniDevTo.Features.Admin.ArticleModeration.GetPendingList
         public override void Configure()
         {
             Get("/admin/articles/pending");
+            AllowAnonymous();
             //Roles("Admin");
         }
 

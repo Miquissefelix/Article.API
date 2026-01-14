@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Author\Login\" />
+    <Folder Include="Features\Auth\Login\" />
   </ItemGroup>
 
   <ItemGroup>

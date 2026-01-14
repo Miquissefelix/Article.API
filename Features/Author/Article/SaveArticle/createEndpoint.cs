@@ -30,23 +30,23 @@ namespace MiniDevTo.Features.Author.Article.SaveArticle
                 return;
             }
 
-            //var article = new MiniDevTo.Domain.Entities.Article
-            //{
-            //    Id = Guid.NewGuid(),
-            //    Title = req.Title,
-            //    Content = req.Content,
-            //    AuthorId = req.AuthorId,
-            //    Status = ArticleStatus.Pending
+            var article = new MiniDevTo.Domain.Entities.Article
+            {
+                Id = Guid.NewGuid(),
+                Title = req.Title,
+                Content = req.Content,
+                AuthorId = req.AuthorId,
+                Status = ArticleStatus.Pending
 
-            //};
+            };
 
-            //_db.Articles.Add(article);
+            _db.Articles.Add(article);
             await _db.SaveChangesAsync(ct);
 
             await SendAsync(new CreateArticleResponse
             {
                 Message = "Article created successfully.",
-                //ArticleId = article.Id
+                ArticleId = article.Id
             });
 
         }
