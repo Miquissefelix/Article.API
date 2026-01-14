@@ -1,7 +1,7 @@
 ﻿using MiniDevTo.Domain.Entities;
 using MiniDevTo.Infrastructure.Database;
 
-namespace MiniDevTo.Features.Author.Signup
+namespace MiniDevTo.Features.Auth.Signup
 {
     public class Author:Endpoint<SignupRequest, SignupResponse>
     {

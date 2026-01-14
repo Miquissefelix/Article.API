@@ -2,7 +2,7 @@
 using MiniDevTo.Infrastructure.Database;
 using MiniDevTo.Services.Auth;
 
-namespace MiniDevTo.Features.Author.Login
+namespace MiniDevTo.Features.Auth.Login
 {
     public class LoginEndpoint: Endpoint<LoginRequest, LoginResponse>
     {
@@ -23,9 +23,9 @@ namespace MiniDevTo.Features.Author.Login
 
         public override async Task HandleAsync(LoginRequest rq,CancellationToken ct)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == rq.Email, ct);
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == rq.Email && u.Password == rq.Password, ct);
 
-            if(user is null || user.Password != rq.Password)
+            if(user is null)
             {
                 await SendAsync(new LoginResponse {
                     Message = "Credenciais inválidas.",
@@ -40,7 +40,8 @@ namespace MiniDevTo.Features.Author.Login
             await SendAsync(new LoginResponse { 
 
             Message="Login efectuado com sucesso",
-            Token = token
+            Token = token,
+            Role = user.Role
 
             });
         }

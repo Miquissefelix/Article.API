@@ -1,4 +1,4 @@
-﻿namespace MiniDevTo.Features.Author.Login
+﻿namespace MiniDevTo.Features.Auth.Login
 {
     public class LoginRequest
     {
@@ -11,4 +11,5 @@ public class LoginResponse
 {
     public string Message { get; set; }= "";    
     public string Token { get; set; } = "";
+    public string Role { get; set; } = "";
 }
