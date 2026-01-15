@@ -13,8 +13,9 @@ namespace MiniDevTo.Features.Author.Article.EditArticle
 
         public override void Configure()
         {
-            Put("");
-            AllowAnonymous();
+            Put("/author/articles/{id}");
+            AuthSchemes("Bearer");
+            Roles("Author");
         }
 
         public override async Task HandleAsync(EditArticleRequest req, CancellationToken ct)

@@ -13,7 +13,8 @@ namespace MiniDevTo.Features.Author.Article.GetAllArticle
         public override void Configure()
         {
             Get("/author/articles");
-            AllowAnonymous();
+            AuthSchemes("Bearer");
+            Roles("Author");
         }
 
         public override async Task HandleAsync(CancellationToken ct)

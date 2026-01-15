@@ -15,7 +15,9 @@ namespace MiniDevTo.Features.Author.Article.DeleteArticle
         public override void Configure()
         {
             Delete("/author/articles/{id}");
-            AllowAnonymous();//futuramente trocar por Roles
+            AuthSchemes("Bearer");
+            Roles("Author");
+          
         }
 
         public override async Task HandleAsync(DeleteArticleRequest req,CancellationToken ct) {
